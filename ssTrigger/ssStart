@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sleep 10; motion -c /opt/webcam_security_system/motion.conf

@@ -1,0 +1,3 @@
+#! /bin/bash
+
+killall motion; rm /opt/webcam_security_system/ssTrigger/tmp/*
