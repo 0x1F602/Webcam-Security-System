@@ -18,8 +18,6 @@ Enable via `wess enable`
 
 Disable via `wess disable`
 
-Configure determines INSTALL PATH
-
 Save images to gmail
 
 ## Should have
@@ -47,7 +45,7 @@ REST API
 # Proposed directory structure
 
 ```
-ZMQ, SQLite3, Mojolicious
+ZMQ, Postgres, Mojolicious
 wess
 |- wess.pl
 |- lib
