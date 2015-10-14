@@ -106,3 +106,7 @@ wess
 |   +- wess-send
 |   +- wess-listen
 ```
+
+# 2015-10-14 Design Thoughts
+
+There are two major parts of this design: the bin/wess application and the wess.pl web application. They are to be designed and implemented completely abstracted from each other. bin/wess will primarily manage its video source (in this case, motion, but could be anything else). wess.pl will provide a user interface and logging backend to bin/wess's messages. They will communicate over MQ, and the first implementation will be in ZMQ. This enables the wess.pl web server to exist away from bin/wess. That means it can be highly scaled and remote for large-scale surveillance like apartment complexes, warehouses and colleges, or it can be small enough to be used in a regular home through a cloud service.
