@@ -1,6 +1,9 @@
 package WESS;
 use Mojo::Base 'Mojolicious';
 
+use strict;
+use warnings;
+
 # This method will run once at server start
 sub startup {
   my $self = shift;
@@ -12,7 +15,7 @@ sub startup {
   my $r = $self->routes;
 
   # Normal route to controller
-  $r->get('/')->to('example#welcome');
+  $r->get('/')->to('Controller::Example#welcome');
 }
 
 1;
