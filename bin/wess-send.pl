@@ -1,19 +1,58 @@
+package WESS::Bin::Client;
+
 use v5.10;
+
+use Moose;
+
 use ZMQ::FFI;
 use ZMQ::FFI::Constants qw(ZMQ_PUSH);
+
 use Time::HiRes q(usleep);
 
-my $endpoint = "tcp://127.0.0.1:3030";
-my $ctx      = ZMQ::FFI->new();
+has 'endpoint' => (
+    is      => 'ro',
+    isa     => 'Str',
+    default => 'tcp://127.0.0.1:3030',
+);
 
-my $p = $ctx->socket(ZMQ_PUSH);
+has 'context' => (
+    is      => 'ro',
+    isa     => 'ZMQ::FFI::ZMQ3::Context',
+    builder => '_context',
+    lazy    => 1,
+);
 
-$p->connect($endpoint);
+has 'socket' => (
+    is      => 'ro',
+    isa     => 'ZMQ::FFI::ZMQ3::Socket',
+    builder => '_socket',
+    lazy    => 1,
+);
 
-my $message = "pid $$ Talking to $endpoint";
-while (1) {
-    say "Sending $message";
-    $p->send($message);
-    sleep 3;
+sub _context {
+    my ($self) = @_;
+    my $context = ZMQ::FFI->new();
+    return $context;
 }
-##### This is left here for perl pp to use for executable generation
+
+sub _socket {
+    my ($self) = @_;
+    my $socket = $self->context->socket(ZMQ_PUSH);
+    $socket->connect($self->endpoint);
+    return $socket;
+}
+
+sub send {
+    my ($self, $zmq_data) = @_;
+    $self->socket->send($zmq_data);
+}
+
+package main;
+
+my $client = WESS::Bin::Client->new();
+
+my $message = "pid $$ Talking to " . $client->endpoint;
+
+$client->send($message);
+
+1;
