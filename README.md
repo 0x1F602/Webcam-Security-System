@@ -1,7 +1,5 @@
 # Webcam-Security-System
 
-Webcam Security System that emails you frames using motion. 
+Distributed webcam security system that logs and encrypts can be used for personal and business installations. Can log to a remote location.
 
-It automatically starts up when locking the screen in Ubuntu.
-
-It automatically shuts off and flushes temp files after unlocking the screen. 
+Uses ZMQ, MongoDB and Postgres.
