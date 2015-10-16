@@ -7,8 +7,6 @@ use Moose;
 use ZMQ::FFI;
 use ZMQ::FFI::Constants qw(ZMQ_PUSH);
 
-use Time::HiRes q(usleep);
-
 has 'endpoint' => (
     is      => 'ro',
     isa     => 'Str',
